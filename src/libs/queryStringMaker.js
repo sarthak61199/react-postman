@@ -1,6 +1,4 @@
-import { QueryParam } from "../state/store";
-
-export default function queryStringMaker(queryStringArray: QueryParam[]) {
+export default function queryStringMaker(queryStringArray) {
   let queryString;
   if (queryStringArray.length !== 0) {
     queryString = queryStringArray

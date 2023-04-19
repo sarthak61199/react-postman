@@ -1,31 +1,31 @@
 import React from "react";
 import { Grid, TextField, IconButton, Button } from "@mui/material";
-import { useUrlStore } from "../../state/store";
-import { QueryParam } from "../../state/store";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function QueryParams() {
-  const queryParam = useUrlStore((state) => state.queryParam);
-  const setQueryParam = useUrlStore((state) => state.setQueryParam);
-
-  function handleQueryChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    index: number
-  ): void {
-    let tempArray = [...queryParam];
-    tempArray[index][e.target.name as keyof QueryParam] = e.target.value;
-    setQueryParam(tempArray);
+function DynamicFields({
+  fields,
+  setFields,
+  keyName,
+  valueName,
+  addObj,
+  keyLabel,
+  valueLabel,
+}) {
+  function handleQueryChange(e, index) {
+    let tempArray = [...fields];
+    tempArray[index][e.target.name] = e.target.value;
+    setFields(tempArray);
   }
 
-  function addField(): void {
-    let tempArray = [...queryParam, { queryKey: "", queryValue: "" }];
-    setQueryParam(tempArray);
+  function addField() {
+    let tempArray = [...fields, addObj];
+    setFields(tempArray);
   }
 
-  function deleteField(i: number): void {
-    let tempArray = [...queryParam];
+  function deleteField(i) {
+    let tempArray = [...fields];
     tempArray.splice(i, 1);
-    setQueryParam(tempArray);
+    setFields(tempArray);
   }
 
   return (
@@ -34,27 +34,27 @@ function QueryParams() {
         Add a Field
       </Button>
       <Grid container alignItems="center">
-        {queryParam.map((item, i) => (
+        {fields.map((item, i) => (
           <React.Fragment key={i}>
             <Grid item xs={5}>
               <TextField
                 fullWidth
-                label="Query Key"
+                label={keyLabel}
                 autoComplete="off"
-                name="queryKey"
+                name={keyName}
                 type="text"
-                value={item.queryKey}
+                value={item[keyName]}
                 onChange={(e) => handleQueryChange(e, i)}
               />
             </Grid>
             <Grid item xs={5}>
               <TextField
                 fullWidth
-                label="Query Value"
+                label={valueLabel}
                 autoComplete="off"
-                name="queryValue"
+                name={valueName}
                 type="text"
-                value={item.queryValue}
+                value={item[valueName]}
                 onChange={(e) => handleQueryChange(e, i)}
               />
             </Grid>
@@ -70,4 +70,4 @@ function QueryParams() {
   );
 }
 
-export default QueryParams;
+export default DynamicFields;

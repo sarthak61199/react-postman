@@ -9,11 +9,11 @@ function RequestOptions() {
   const setRequestMethod = useUrlStore((state) => state.setRequestMethod);
   const setRequestUrl = useUrlStore((state) => state.setRequestUrl);
 
-  function handleRequestMethodChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleRequestMethodChange(e) {
     setRequestMethod(e.target.value);
   }
 
-  function handleRequestUrlChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleRequestUrlChange(e) {
     setRequestUrl(e.target.value);
   }
 

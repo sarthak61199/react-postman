@@ -5,13 +5,7 @@ import { useCollectionStore } from "../state/store";
 import { useUrlStore } from "../state/store";
 import HeaderOptions from "./TabComponents/HeaderOptions";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
+function TabPanel(props) {
   const { children, value, index } = props;
 
   return (
@@ -34,12 +28,9 @@ function RequestParams() {
   const requestUrl = useUrlStore((state) => state.requestUrl);
   const queryParam = useUrlStore((state) => state.queryParam);
   const headers = useUrlStore((state) => state.headers);
-  const [tabIndex, setTabIndex] = useState<number>(0);
+  const [tabIndex, setTabIndex] = useState(0);
 
-  function handleTabChange(
-    event: React.SyntheticEvent,
-    newValue: number
-  ): void {
+  function handleTabChange(event, newValue) {
     setTabIndex(newValue);
   }
 

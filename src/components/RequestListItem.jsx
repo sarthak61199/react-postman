@@ -1,13 +1,6 @@
 import { Box, Typography } from "@mui/material";
 
-interface RequestListItemProps {
-  item: {
-    requestMethod: string;
-    requestUrl: string;
-  };
-}
-
-function RequestListItem({ item }: RequestListItemProps) {
+function RequestListItem({ item }) {
   return (
     <Box
       display="flex"

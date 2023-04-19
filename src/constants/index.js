@@ -1,9 +1,4 @@
-type IReqOption = {
-  id: number;
-  option: string;
-}[];
-
-export const reqOptions: IReqOption = [
+export const reqOptions = [
   { id: 1, option: "GET" },
   { id: 2, option: "POST" },
   { id: 3, option: "DELETE" },
