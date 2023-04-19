@@ -1,7 +1,29 @@
 import { useState } from "react";
 import { Box, Typography, Tabs, Tab, Button } from "@mui/material";
+import QueryParams from "./TabComponents/QueryParams";
 import { useCollectionStore } from "../state/store";
 import { useUrlStore } from "../state/store";
+
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+    >
+      {value === index && <Box>{children}</Box>}
+    </div>
+  );
+}
 
 function RequestParams() {
   const setRequestCollection = useCollectionStore(
@@ -9,6 +31,7 @@ function RequestParams() {
   );
   const requestMethod = useUrlStore((state) => state.requestMethod);
   const requestUrl = useUrlStore((state) => state.requestUrl);
+  const queryParam = useUrlStore((state) => state.queryParam);
   const [tabIndex, setTabIndex] = useState<number>(0);
 
   function handleTabChange(
@@ -19,7 +42,7 @@ function RequestParams() {
   }
 
   function addToCollection() {
-    setRequestCollection({ requestMethod, requestUrl });
+    setRequestCollection({ requestMethod, requestUrl, queryParam });
   }
 
   return (
@@ -32,6 +55,15 @@ function RequestParams() {
           <Tab label="JSON" value={2} />
         </Tabs>
       </Box>
+      <TabPanel value={tabIndex} index={0}>
+        <QueryParams />
+      </TabPanel>
+      <TabPanel value={tabIndex} index={1}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={tabIndex} index={2}>
+        Item Three
+      </TabPanel>
       <Button variant="contained" onClick={addToCollection}>
         Add to Collection
       </Button>

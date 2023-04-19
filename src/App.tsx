@@ -14,15 +14,15 @@ function App() {
         <Grid container>
           <Grid item container xs={12}>
             <RequestOptions />
-            <Grid item xs={4}>
-              <RequestList />
-            </Grid>
-            <Grid item xs={8}>
-              <RequestParams />
-            </Grid>
-            <Grid item xs={12}>
-              <JsonViewer />
-            </Grid>
+          </Grid>
+          <Grid item xs={4}>
+            <RequestList />
+          </Grid>
+          <Grid item xs={8}>
+            <RequestParams />
+          </Grid>
+          <Grid item xs={12}>
+            <JsonViewer />
           </Grid>
         </Grid>
       </Container>
