@@ -12,14 +12,14 @@ function RequestList() {
   async function multipleReq() {
     const promises = requestCollection.map((item) => {
       const queryString = queryStringMaker(item.queryParam);
-      const { requestUrl, requestMethod } = item;
-      return fetcher(requestUrl, requestMethod, queryString);
+      const { requestUrl, requestMethod, body } = item;
+      return fetcher(requestUrl, requestMethod, queryString, body);
     });
     const resp = await Promise.all(promises);
   }
 
   return (
-    <Box height={500}>
+    <Box height={400}>
       <Typography variant="body1">Collections</Typography>
       <Button
         variant="contained"

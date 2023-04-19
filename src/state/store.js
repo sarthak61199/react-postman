@@ -5,10 +5,12 @@ export const useUrlStore = create((set) => ({
   requestUrl: "",
   queryParam: [],
   headers: [],
+  body: "{}",
   setRequestMethod: (value) => set(() => ({ requestMethod: value })),
   setRequestUrl: (value) => set(() => ({ requestUrl: value })),
   setQueryParam: (value) => set(() => ({ queryParam: value })),
   setHeaders: (value) => set(() => ({ headers: value })),
+  setBody: (value) => set(() => ({ body: value })),
 }));
 
 export const useCollectionStore = create((set) => ({
@@ -17,4 +19,9 @@ export const useCollectionStore = create((set) => ({
     set((state) => ({
       requestCollection: [...state.requestCollection, value],
     })),
+}));
+
+export const useBodyStore = create((set) => ({
+  bodyDisplay: "",
+  setBodyDisplay: (value) => set(() => ({ bodyDisplay: value })),
 }));

@@ -1,8 +1,7 @@
-import React from "react";
 import { useUrlStore } from "../../state/store";
 import DynamicFields from "../DynamicFields";
 
-function QueryParams() {
+function QueryTab() {
   const queryParam = useUrlStore((state) => state.queryParam);
   const setQueryParam = useUrlStore((state) => state.setQueryParam);
 
@@ -19,4 +18,4 @@ function QueryParams() {
   );
 }
 
-export default QueryParams;
+export default QueryTab;

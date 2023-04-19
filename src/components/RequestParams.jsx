@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Box, Typography, Tabs, Tab, Button } from "@mui/material";
-import QueryParams from "./TabComponents/QueryParams";
 import { useCollectionStore } from "../state/store";
 import { useUrlStore } from "../state/store";
-import HeaderOptions from "./TabComponents/HeaderOptions";
+import QueryTab from "./TabComponents/QueryTab";
+import HeaderTab from "./TabComponents/HeaderTab";
+import BodyTab from "./TabComponents/BodyTab";
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -28,6 +29,7 @@ function RequestParams() {
   const requestUrl = useUrlStore((state) => state.requestUrl);
   const queryParam = useUrlStore((state) => state.queryParam);
   const headers = useUrlStore((state) => state.headers);
+  const stringBody = useUrlStore((state) => state.body);
   const [tabIndex, setTabIndex] = useState(0);
 
   function handleTabChange(event, newValue) {
@@ -35,11 +37,18 @@ function RequestParams() {
   }
 
   function addToCollection() {
-    setRequestCollection({ requestMethod, requestUrl, queryParam, headers });
+    const body = JSON.parse(stringBody);
+    setRequestCollection({
+      requestMethod,
+      requestUrl,
+      queryParam,
+      headers,
+      body,
+    });
   }
 
   return (
-    <Box height={500} overflow="auto">
+    <Box height={400} overflow="auto">
       <Typography variant="body1">Request Parameters</Typography>
       <Box>
         <Tabs onChange={handleTabChange} value={tabIndex}>
@@ -49,13 +58,13 @@ function RequestParams() {
         </Tabs>
       </Box>
       <TabPanel value={tabIndex} index={0}>
-        <QueryParams />
+        <QueryTab />
       </TabPanel>
       <TabPanel value={tabIndex} index={1}>
-        <HeaderOptions />
+        <HeaderTab />
       </TabPanel>
       <TabPanel value={tabIndex} index={2}>
-        Item Three
+        <BodyTab />
       </TabPanel>
       <Button variant="contained" onClick={addToCollection}>
         Add to Collection

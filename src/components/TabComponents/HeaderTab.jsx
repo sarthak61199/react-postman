@@ -1,8 +1,7 @@
-import React from "react";
 import { useUrlStore } from "../../state/store";
 import DynamicFields from "../DynamicFields";
 
-function HeaderOptions() {
+function HeaderTab() {
   const headers = useUrlStore((state) => state.headers);
   const setHeaders = useUrlStore((state) => state.setHeaders);
 
@@ -19,4 +18,4 @@ function HeaderOptions() {
   );
 }
 
-export default HeaderOptions;
+export default HeaderTab;
