@@ -3,6 +3,7 @@ import { Box, Typography, Tabs, Tab, Button } from "@mui/material";
 import QueryParams from "./TabComponents/QueryParams";
 import { useCollectionStore } from "../state/store";
 import { useUrlStore } from "../state/store";
+import HeaderOptions from "./TabComponents/HeaderOptions";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -32,6 +33,7 @@ function RequestParams() {
   const requestMethod = useUrlStore((state) => state.requestMethod);
   const requestUrl = useUrlStore((state) => state.requestUrl);
   const queryParam = useUrlStore((state) => state.queryParam);
+  const headers = useUrlStore((state) => state.headers);
   const [tabIndex, setTabIndex] = useState<number>(0);
 
   function handleTabChange(
@@ -42,7 +44,7 @@ function RequestParams() {
   }
 
   function addToCollection() {
-    setRequestCollection({ requestMethod, requestUrl, queryParam });
+    setRequestCollection({ requestMethod, requestUrl, queryParam, headers });
   }
 
   return (
@@ -59,7 +61,7 @@ function RequestParams() {
         <QueryParams />
       </TabPanel>
       <TabPanel value={tabIndex} index={1}>
-        Item Two
+        <HeaderOptions />
       </TabPanel>
       <TabPanel value={tabIndex} index={2}>
         Item Three
