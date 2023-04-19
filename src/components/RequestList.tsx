@@ -1,7 +1,11 @@
 import { Box, Typography, Button } from "@mui/material";
 import RequestListItem from "./RequestListItem";
+import { useCollectionStore } from "../state/store";
 
 function RequestList() {
+  const requestCollection = useCollectionStore(
+    (state) => state.requestCollection
+  );
   return (
     <Box height={500}>
       <Typography variant="body1">Collections</Typography>
@@ -12,13 +16,11 @@ function RequestList() {
         overflow="auto"
         className="request-list-container"
       >
-        <RequestListItem />
-        <RequestListItem />
-        <RequestListItem />
-        <RequestListItem />
-        <RequestListItem />
-        <RequestListItem />
-        <RequestListItem />
+        {requestCollection.length === 0 ? (
+          <Typography>No collections to show</Typography>
+        ) : (
+          requestCollection.map((item) => <RequestListItem item={item} />)
+        )}
       </Box>
     </Box>
   );

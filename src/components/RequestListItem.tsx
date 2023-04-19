@@ -1,6 +1,13 @@
 import { Box, Typography } from "@mui/material";
 
-function RequestListItem() {
+interface RequestListItemProps {
+  item: {
+    requestMethod: string;
+    requestUrl: string;
+  };
+}
+
+function RequestListItem({ item }: RequestListItemProps) {
   return (
     <Box
       display="flex"
@@ -10,9 +17,7 @@ function RequestListItem() {
       pb={2}
       mb={2}
     >
-      <Typography>
-        URL: https://jsonplaceholder.typicode.com/comments?postId=1
-      </Typography>
+      <Typography>URL: {item.requestUrl}</Typography>
       <Box
         borderRadius={5}
         border="1px solid black"
@@ -20,7 +25,7 @@ function RequestListItem() {
         px={2}
       >
         <Typography component="span" variant="caption">
-          METHOD: GET
+          METHOD: {item.requestMethod}
         </Typography>
       </Box>
     </Box>
