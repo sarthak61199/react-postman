@@ -37,7 +37,7 @@ function RequestParams() {
   }
 
   function addToCollection() {
-    const body = JSON.parse(stringBody);
+    const body = JSON.parse(stringBody.trim());
     setRequestCollection({
       requestMethod,
       requestUrl,

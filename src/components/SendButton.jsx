@@ -23,7 +23,7 @@ function SendButton() {
       requestUrl,
       requestMethod,
       queryString,
-      JSON.parse(body),
+      JSON.parse(body.trim()),
       headerObject
     );
     const beautyJson = js_beautify(
