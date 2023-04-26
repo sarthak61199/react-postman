@@ -1,6 +1,17 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
+import js_beautify from "js-beautify";
+import { jsBeautifyOptions } from "../constants";
+import { useBodyStore } from "../state/store";
 
-function RequestListItem({ item }) {
+function RequestListItem({ item, respLength, response }) {
+  const setBodyDisplay = useBodyStore((state) => state.setBodyDisplay);
+  function setJsonBody() {
+    const beautyJson = js_beautify(
+      JSON.stringify(response.data),
+      jsBeautifyOptions
+    );
+    setBodyDisplay(beautyJson);
+  }
   return (
     <Box
       display="flex"
@@ -21,6 +32,15 @@ function RequestListItem({ item }) {
           METHOD: {item.requestMethod}
         </Typography>
       </Box>
+      {respLength ? (
+        <Button
+          variant="contained"
+          sx={{ alignSelf: "flex-start" }}
+          onClick={setJsonBody}
+        >
+          View Response
+        </Button>
+      ) : null}
     </Box>
   );
 }

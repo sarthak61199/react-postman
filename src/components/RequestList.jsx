@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import RequestListItem from "./RequestListItem";
 import { useCollectionStore } from "../state/store";
@@ -6,6 +7,8 @@ import queryStringMaker from "../libs/queryStringMaker";
 import headersMaker from "../libs/headersMaker";
 
 function RequestList() {
+  const [respLength, setRespLength] = useState(0);
+  const [response, setResponse] = useState([]);
   const requestCollection = useCollectionStore(
     (state) => state.requestCollection
   );
@@ -24,6 +27,8 @@ function RequestList() {
       );
     });
     const resp = await Promise.all(promises);
+    setResponse(resp);
+    setRespLength(resp.length);
   }
 
   return (
@@ -46,7 +51,12 @@ function RequestList() {
           <Typography>No collections to show</Typography>
         ) : (
           requestCollection.map((item, i) => (
-            <RequestListItem item={item} key={i} />
+            <RequestListItem
+              item={item}
+              key={i}
+              respLength={respLength}
+              response={response[i]}
+            />
           ))
         )}
       </Box>
