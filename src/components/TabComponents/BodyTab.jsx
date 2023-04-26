@@ -13,7 +13,7 @@ function BodyTab() {
   return (
     <CodeMirror
       value={body}
-      height="300px"
+      height="250px"
       extensions={[json()]}
       onChange={handleBodyChange}
     />

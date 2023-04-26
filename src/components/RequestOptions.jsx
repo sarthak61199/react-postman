@@ -1,4 +1,4 @@
-import { Grid, TextField, MenuItem } from "@mui/material";
+import { Grid, TextField, MenuItem, Typography } from "@mui/material";
 import SendButton from "./SendButton";
 import { reqOptions } from "../constants";
 import { useUrlStore } from "../state/store";
@@ -19,6 +19,9 @@ function RequestOptions() {
 
   return (
     <>
+      <Grid item xs={12}>
+        <Typography variant="body1">Request Options</Typography>
+      </Grid>
       <Grid item xs={3}>
         <TextField
           fullWidth

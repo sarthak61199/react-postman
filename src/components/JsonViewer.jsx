@@ -7,7 +7,7 @@ function JsonViewer() {
   return (
     <CodeMirror
       value={bodyDisplay}
-      height="300px"
+      height="250px"
       extensions={[json()]}
       editable={false}
     />

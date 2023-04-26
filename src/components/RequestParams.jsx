@@ -1,10 +1,18 @@
-import { useState } from "react";
-import { Box, Typography, Tabs, Tab, Button } from "@mui/material";
+import { useState, Suspense, lazy } from "react";
+import {
+  Box,
+  Typography,
+  Tabs,
+  Tab,
+  Button,
+  CircularProgress,
+} from "@mui/material";
 import { useCollectionStore } from "../state/store";
 import { useUrlStore } from "../state/store";
 import QueryTab from "./TabComponents/QueryTab";
-import HeaderTab from "./TabComponents/HeaderTab";
-import BodyTab from "./TabComponents/BodyTab";
+
+const HeaderTab = lazy(() => import("./TabComponents/HeaderTab"));
+const BodyTab = lazy(() => import("./TabComponents/BodyTab"));
 
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -61,10 +69,14 @@ function RequestParams() {
         <QueryTab />
       </TabPanel>
       <TabPanel value={tabIndex} index={1}>
-        <HeaderTab />
+        <Suspense fallback={<CircularProgress />}>
+          <HeaderTab />
+        </Suspense>
       </TabPanel>
       <TabPanel value={tabIndex} index={2}>
-        <BodyTab />
+        <Suspense fallback={<CircularProgress />}>
+          <BodyTab />
+        </Suspense>
       </TabPanel>
       <Button variant="contained" onClick={addToCollection}>
         Add to Collection
