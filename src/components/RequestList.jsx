@@ -3,6 +3,7 @@ import RequestListItem from "./RequestListItem";
 import { useCollectionStore } from "../state/store";
 import fetcher from "../libs/fetcher";
 import queryStringMaker from "../libs/queryStringMaker";
+import headersMaker from "../libs/headersMaker";
 
 function RequestList() {
   const requestCollection = useCollectionStore(
@@ -12,8 +13,15 @@ function RequestList() {
   async function multipleReq() {
     const promises = requestCollection.map((item) => {
       const queryString = queryStringMaker(item.queryParam);
+      const headersObject = headersMaker(item.headers);
       const { requestUrl, requestMethod, body } = item;
-      return fetcher(requestUrl, requestMethod, queryString, body);
+      return fetcher(
+        requestUrl,
+        requestMethod,
+        queryString,
+        body,
+        headersObject
+      );
     });
     const resp = await Promise.all(promises);
   }
