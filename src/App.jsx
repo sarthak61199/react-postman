@@ -1,9 +1,11 @@
-import { CssBaseline, Grid, Container } from "@mui/material";
+import { Suspense, lazy } from "react";
+import { CssBaseline, Grid, Container, CircularProgress } from "@mui/material";
 import Header from "./components/Header";
 import RequestParams from "./components/RequestParams";
 import RequestList from "./components/RequestList";
-import JsonViewer from "./components/JsonViewer";
 import RequestOptions from "./components/RequestOptions";
+
+const JsonViewer = lazy(() => import("./components/JsonViewer"));
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
             <RequestParams />
           </Grid>
           <Grid item xs={12}>
-            <JsonViewer />
+            <Suspense fallback={<CircularProgress />}>
+              <JsonViewer />
+            </Suspense>
           </Grid>
         </Grid>
       </Container>
