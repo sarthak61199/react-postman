@@ -45,7 +45,7 @@ function RequestParams() {
   }
 
   function addToCollection() {
-    const body = JSON.parse(stringBody.trim());
+    const body = JSON.parse(stringBody);
     setRequestCollection({
       requestMethod,
       requestUrl,
@@ -78,7 +78,11 @@ function RequestParams() {
           <BodyTab />
         </Suspense>
       </TabPanel>
-      <Button variant="contained" onClick={addToCollection}>
+      <Button
+        variant="contained"
+        onClick={addToCollection}
+        disabled={!Boolean(requestUrl)}
+      >
         Add to Collection
       </Button>
     </Box>

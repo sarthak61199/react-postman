@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export default function fetcher(url, method, queryString, body, headers) {
+export default function fetcher(url, method, queryString, data, headers) {
   const resp = axios({
-    method: method,
-    url: `${url}${queryString ? "?" : ""}${queryString ? queryString : ""}`,
-    data: body,
+    method,
+    url: `${url}${queryString ? "?" + queryString : ""}`,
+    data,
     headers,
   });
   return resp;
